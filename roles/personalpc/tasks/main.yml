@@ -1,2 +1,7 @@
----
-# tasks file for personalpc
+--- # tasks file for personalpc
+
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'

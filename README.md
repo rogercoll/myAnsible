@@ -13,3 +13,4 @@ Roles provide a framework for fully independent, or interdependent collections o
 The directory structure for roles is essential to create a new role.
 Each role is a directory tree in itself. The role name is the directory name within the /roles directory.
 Create a new role=ansible-galaxy init personalpc
+Run a role=ansible-playbook -i inventory site.yml
