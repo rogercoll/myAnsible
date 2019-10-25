@@ -1,7 +1,6 @@
 ---
 - name: Set basic configurations for a new Linux distribuition pc
-  hosts:
-    - 35.184.219.247
+  hosts: testing
   remote_user: roger_coll_aumatell
   become: true
   roles:
