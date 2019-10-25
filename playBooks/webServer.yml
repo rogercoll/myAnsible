@@ -1,16 +1,18 @@
 --- #Bootstrap Webservers
 - hosts: testing
   become: yes
+  vars:
+    target_service: nginx
 
   tasks:
   - name: Install ngnix
     apt:
-     name: nginx
+     name: "{{ target_service }}"
      update_cache: yes
      force_apt_get: yes
   - name: Make sure nginx is started
     systemd:
-     name: nginx
+     name: "{{ target_service }}"
      state: started
   - name: Creating new html file
     file:
@@ -18,7 +20,7 @@
      state: touch
   - name: Add content to web file
     lineinfile:
-      line: "<h1>Hey this is a file created with Ansible!!!</h1>"
+      line: "<h1>Hey this is a file created with Ansible!!! Information about the machine: <br></br> {{ ansible_distribution }} {{ ansible_distribution_release }}</h1>"
       path: /var/www/html/index2.html
   - name: Check that url is available and return the content
     uri:
