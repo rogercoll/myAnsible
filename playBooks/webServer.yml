@@ -1,0 +1,26 @@
+--- #Bootstrap Webservers
+- hosts: testing
+  become: yes
+
+  tasks:
+  - name: Install ngnix
+    apt:
+     name: nginx
+     update_cache: yes
+     force_apt_get: yes
+  - name: Make sure nginx is started
+    systemd:
+     name: nginx
+     state: started
+  - name: Creating new html file
+    file:
+     name: /var/www/html/index2.html
+     state: touch
+  - name: Add content to web file
+    lineinfile:
+      line: "<h1>Hey this is a file created with Ansible!!!</h1>"
+      path: /var/www/html/index2.html
+  - name: Check that url is available and return the content
+    uri:
+      url: http://localhost/index2.html
+      return_content: yes
